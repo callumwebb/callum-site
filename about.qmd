@@ -1,0 +1,34 @@
+---
+title: "About"
+title-block-style: default
+toc: false
+about:
+  image: me.jpg
+  template: trestles
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/callumwebb
+    - icon: linkedin
+      text: Linkedin
+      href: https://linkedin.com/in/callumwebb
+    - icon: instagram
+      text: callummwebb
+      href: https://www.instagram.com/callummwebb
+css: about.css
+---
+
+## Hello!
+
+I'm a Staff machine learning engineer working on search and recommendations at Deliveroo, based in London. In past roles, I've worked on:
+
+* Building data products at Bibliu, an educational technology startup
+* Financial regulation
+* Innovative conveyor belt monitoring technologies
+* Optimising autonomous mining operations and copper extraction
+* Heavy haul railway maintenance
+* Mentoring young people who want to learn how to code
+
+And other software development in Python, Objective C, and C++. Outside of work I enjoy photography, keeping fit, and eating chocolate.
+
+This site serves as a repository of notes and blog posts about topics I find interesting, maybe you'll find something useful here too!

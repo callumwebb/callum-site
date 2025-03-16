@@ -1,0 +1,4 @@
+/* Hide the title on the About page */
+.quarto-title-block {
+    display: none;
+}
