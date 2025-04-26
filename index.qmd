@@ -1,5 +1,8 @@
 ---
-title: "callum-site"
+listing:
+    contents: posts
+    type: default
+    sort: "date"
 ---
 
 This is a Quarto website.
