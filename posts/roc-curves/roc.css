@@ -1,0 +1,86 @@
+/* ROC Curves CSS */
+
+/* General visualization styles */
+figure {
+  margin: 1rem auto;
+}
+
+/* Berry styling */
+.raspberry {
+  fill: #e63946;
+  stroke: none;
+}
+
+.blueberry {
+  fill: #457b9d;
+  stroke: none;
+}
+
+/* Node labels */
+.nodeLabel {
+  fill: none;
+  stroke-dasharray: 3, 3;
+  stroke-width: 1;
+}
+
+.nodeLabel.pos {
+  stroke: #e63946;
+}
+
+.nodeLabel.neg {
+  stroke: #457b9d;
+}
+
+/* ROC plot styling */
+.grid line {
+  stroke: #ddd;
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+}
+
+.grid path {
+  stroke-width: 0;
+}
+
+.diagonal {
+  stroke: #999;
+  stroke-dasharray: 5, 5;
+  stroke-width: 1;
+}
+
+.rocL {
+  fill: none;
+  stroke: #333;
+  stroke-width: 2;
+}
+
+.point {
+  fill: #000;
+}
+
+/* Slider styling */
+input[type=range] {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Math formatting */
+.math {
+  list-style-type: none;
+  margin-left: 1rem;
+}
+
+/* Make sure span elements are inline */
+span {
+  display: inline-block;
+}
+
+/* Berry plot styles */
+.berry-plot circle {
+  cursor: pointer;
+}
+
+/* Confusion matrix styles */
+.confusion {
+  font-weight: bold;
+}
