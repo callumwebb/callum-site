@@ -1,0 +1,33 @@
+.node {
+    user-select: none;  /* Prevent text selection while dragging */
+}
+
+/* Berry styling */
+.raspberry {
+    fill: #d20000;
+    stroke: #500000;
+    stroke-width: 3px;
+}
+  
+.blueberry {
+    fill: #0059de;
+    stroke: #002050;
+    stroke-width: 3px;
+}
+
+.nodeLabel {
+    fill: white;
+    fill-opacity: 0;
+    stroke-opacity: 0.75;
+    stroke-width: 5px;
+    stroke-dasharray: 10;
+}
+
+.nodeLabel.pos {
+    stroke: #d20000;
+}
+  
+  .nodeLabel.neg {
+    stroke: #0059de;
+}
+  

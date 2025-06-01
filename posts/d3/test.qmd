@@ -1,12 +1,14 @@
 ---
-title: "Shared State D3 Visuals"
+title: "rewrite"
 format: html
 ---
 
-## Interactive Visualizations
+## Dev
 
 <div id="viz1"></div>
 <div id="viz2"></div>
+<div id="clusters"></div>
+
 
 <!-- Load D3 -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -15,4 +17,5 @@ format: html
 <script type="module" src="_resources/main.js"></script>
 <script type="module" src="_resources/graph1.js" data-quarto-ignore></script>
 <script type="module" src="_resources/graph2.js" data-quarto-ignore></script>
+<script type="module" src="_resources/cluster-view.js" data-quarto-ignore></script>
 <script type="module" src="_resources/state.js" data-quarto-ignore></script>
