@@ -5,26 +5,34 @@
 
 import { store } from "./main.js";
 
-export function renderClusterView(containerId) {
+export function renderClusterView(containerId, options = {}) {
+    const scale = options.scale || 1;
+    const baseWidth = 400;
+    const baseHeight = 190;
+    
     const container = d3.select(containerId);
-    const svg = container.append("svg").attr("width", 400).attr("height", 170);
+    const svg = container.append("svg")
+        .attr("width", baseWidth * scale)
+        .attr("height", baseHeight * scale)
+        .attr("viewBox", `0 0 ${baseWidth} ${baseHeight}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
     
     // Define cluster centers
     const clusterCenters = [
-        {x: 100, y: 85},  // Left center for label 0
-        {x: 300, y: 85}   // Right center for label 1
+        {x: 100, y: 100},  // Left center for label 0
+        {x: 300, y: 100}   // Right center for label 1
     ];
 
     const berrySize = 16; // default berry (outermost circle) size
-    const forceClusterStrength = 0.05;
+    const forceClusterStrength = 0.03;  // Reduced from 0.05
 
     // Custom force to attract nodes to their label's cluster center
     function forceCluster(alpha) {
         for (let i = 0; i < state.nodes.length; i++) {
             const d = state.nodes[i];
             const center = clusterCenters[d.label];
-            d.vx += (center.x - d.x) * alpha * 0.1;
-            d.vy += (center.y - d.y) * alpha * 0.1;
+            d.vx += (center.x - d.x) * alpha * 0.05;  // Reduced from 0.1
+            d.vy += (center.y - d.y) * alpha * 0.05;
         }
     }
 
@@ -105,4 +113,17 @@ export function renderClusterView(containerId) {
                 .attr("transform", d => `translate(${d.x},${d.y})`);
         });
     });
+
+    // Add cluster labels
+    svg.append("text")
+        .attr("x", clusterCenters[0].x)
+        .attr("y", clusterCenters[0].y - 85)
+        .attr("text-anchor", "middle")
+        .text("blueberries");
+
+    svg.append("text")
+        .attr("x", clusterCenters[1].x)
+        .attr("y", clusterCenters[1].y - 85)
+        .attr("text-anchor", "middle")
+        .text("raspberries");
 }

@@ -15,6 +15,15 @@
     stroke-width: 3px;
 }
 
+/* Text styling that matches berry colors */
+.raspberry-text {
+    fill: #d20000;
+}
+
+.blueberry-text {
+    fill: #0059de;
+}
+
 .nodeLabel {
     fill: white;
     fill-opacity: 0;
@@ -27,7 +36,19 @@
     stroke: #d20000;
 }
   
-  .nodeLabel.neg {
+.nodeLabel.neg {
     stroke: #0059de;
+}
+
+/* ROC Curve styling */
+.reference-line {
+    stroke: #999;
+    stroke-dasharray: 4,4;
+    stroke-width: 1px;
+}
+
+.current-point {
+    fill: #000;
+    stroke: none;
 }
   

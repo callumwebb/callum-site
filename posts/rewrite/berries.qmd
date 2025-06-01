@@ -7,6 +7,9 @@ css: _resources/cluster-view.css
 ## Interactive Visualizations
 
 <div id="clusters"></div>
+<div id="confusion"></div>
+<div id="roc"></div>
+<div id="clusters-small"></div>
 
 
 <!-- Load D3 -->
@@ -16,3 +19,5 @@ css: _resources/cluster-view.css
 <script type="module" src="./_resources/main.js"></script>
 <script type="module" src="./_resources/state.js"></script>
 <script type="module" src="./_resources/cluster-view.js"></script>
+<script type="module" src="./_resources/confusion-matrix.js"></script>
+<script type="module" src="./_resources/roc-curve.js"></script>
