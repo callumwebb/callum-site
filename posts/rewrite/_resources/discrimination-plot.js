@@ -44,8 +44,8 @@ export function renderDiscriminationPlot(selector, store) {
   const sliderContainer = container
     .append("div")
     .style("width", "100%")
-    .style("padding", "0 10px")
-    .style("margin-top", "-30px");  // Move slider up closer to the plot
+    .style("padding", "0 5px")
+    .style("margin-top", "-30px");
 
   const slider = sliderContainer
     .append("input")
