@@ -179,7 +179,7 @@ input[type="range"]::-moz-range-thumb:active {
 
 .rocL {
     fill: none;
-    stroke: #000;
-    stroke-width: 1;
+    stroke: #4d4d4d;
+    stroke-width: 1.5;
 }
   

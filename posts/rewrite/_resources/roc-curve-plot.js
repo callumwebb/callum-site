@@ -61,7 +61,7 @@ export function renderRocCurvePlot(selector, store) {
   // Add container for the current point
   const point = svg.append("circle")
     .attr("class", "current-point")
-    .attr("r", 3);
+    .attr("r", 4);
 
   // Add container for the ROC curve
   const rocLine = d3.line()
