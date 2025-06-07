@@ -19,7 +19,8 @@ export function renderDiscriminationPlot(selector, store) {
   // Create scales
   const xScale = d3.scaleLinear()
     .domain([0, 1])
-    .range([0, width]);
+    .range([0, width])
+    .clamp(true);
 
   // Create axis
   const xAxis = d3.axisBottom(xScale)
@@ -63,36 +64,42 @@ export function renderDiscriminationPlot(selector, store) {
   function update(state) {
     // Update threshold line
     const x = xScale(state.threshold);
-    thresholdLine.attr("x1", x).attr("x2", x);
+    thresholdLine
+      .attr("x1", x)
+      .attr("x2", x);
 
     // Update slider value if it was changed programmatically
     if (+slider.node().value !== state.threshold * 100) {
       slider.node().value = state.threshold * 100;
     }
 
-    // Update berries
-    const berries = svg.selectAll(".berry")
+    // Update label circles (outer)
+    const labelCircles = svg.selectAll(".nodeLabel")
       .data(state.nodes);
 
-    // Remove old berries
-    berries.exit().remove();
+    labelCircles.exit().remove();
 
-    // Add new berries
-    berries.enter()
+    labelCircles.enter()
       .append("circle")
-      .attr("class", "berry")
-      .merge(berries)
+      .merge(labelCircles)
+      .attr("class", d => d.value >= state.threshold ? "nodeLabel pos" : "nodeLabel neg")
+      .attr("r", 12)
+      .attr("cx", d => xScale(d.value))
+      .attr("cy", height/2);
+
+    // Update berry circles (inner)
+    const berryCircles = svg.selectAll(".berry")
+      .data(state.nodes);
+
+    berryCircles.exit().remove();
+
+    berryCircles.enter()
+      .append("circle")
+      .merge(berryCircles)
+      .attr("class", d => d.type === 1 ? "berry raspberry" : "berry blueberry")
       .attr("r", berrySize)
-      .attr("transform", d => `translate(${xScale(d.value)},${height/2})`)
-      .attr("class", d => {
-        const isPositive = d.value >= state.threshold;
-        const isRaspberry = d.type === 1;
-        if (isRaspberry) {
-          return isPositive ? "raspberry" : "raspberry misclassified";
-        } else {
-          return isPositive ? "blueberry misclassified" : "blueberry";
-        }
-      });
+      .attr("cx", d => xScale(d.value))
+      .attr("cy", height/2);
   }
 
   // Initial render
