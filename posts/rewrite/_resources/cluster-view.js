@@ -24,15 +24,19 @@ export function renderClusterView(containerId, options = {}) {
     ];
 
     const berrySize = 16; // default berry (outermost circle) size
-    const forceClusterStrength = 0.03;  // Reduced from 0.05
+    const forceClusterStrength = 0.03;
+    const alphaActive = 1;
+    const alphaInactive = 0.01;
+    const alphaDecay = 0.02;
+    const velocityDecay = 0.2;
 
     // Custom force to attract nodes to their label's cluster center
     function forceCluster(alpha) {
         for (let i = 0; i < state.nodes.length; i++) {
             const d = state.nodes[i];
             const center = clusterCenters[d.label];
-            d.vx += (center.x - d.x) * alpha * 0.05;  // Reduced from 0.1
-            d.vy += (center.y - d.y) * alpha * 0.05;
+            d.vx += (center.x - d.x) * alpha * forceClusterStrength;
+            d.vy += (center.y - d.y) * alpha * forceClusterStrength;
         }
     }
 
@@ -40,33 +44,59 @@ export function renderClusterView(containerId, options = {}) {
     const simulation = d3.forceSimulation()
         .force("cluster", forceCluster)
         .force("collide", d3.forceCollide().radius(berrySize + 3).strength(0.7))
-        .alphaDecay(0.02)
-        .alphaTarget(0.001)
-        .velocityDecay(0.07);
+        .alphaDecay(alphaDecay)
+        .alphaTarget(alphaInactive)
+        .velocityDecay(velocityDecay);
+    
+    // console.log('Initial simulation alpha:', simulation.alpha());
+
+    // Helper function to reheat simulation
+    function reheatSimulation() {
+        simulation
+            .alpha(1)           // Reset alpha to 1
+            .alphaTarget(alphaInactive)
+            .restart();
+        // console.log('Reheated - alpha:', simulation.alpha());
+    }
 
     // Define drag behavior
     const drag = d3.drag()
         .on("start", (event, d) => {
-            if (!event.active) simulation.alphaTarget(0.3).restart();
+            if (!event.active) {
+                reheatSimulation();
+            }
             d.fx = d.x;
             d.fy = d.y;
+            // Set global interaction state
+            store.setState({ isInteracting: true });
         })
         .on("drag", (event, d) => {
             d.fx = event.x;
             d.fy = event.y;
         })
         .on("end", (event, d) => {
-            if (!event.active) simulation.alphaTarget(0);
+            if (!event.active) {
+                simulation.alphaTarget(alphaInactive);
+                // console.log('Drag end - alpha:', simulation.alpha());
+            }
             d.fx = null;
             d.fy = null;
+            // Clear global interaction state
+            store.setState({ isInteracting: false });
         });
 
     let state = store.getState();
     simulation.nodes(state.nodes);
 
     store.subscribe((newState) => {
+        const oldState = state;
         state = newState;
         
+        // Check if any labels changed
+        const labelsChanged = state.nodes.some((node, i) => 
+            oldState.nodes[i] && node.label !== oldState.nodes[i].label
+        );
+
         const nodes = svg.selectAll(".node")
             .data(state.nodes, (d, i) => i);
 
@@ -84,6 +114,8 @@ export function renderClusterView(containerId, options = {}) {
                             node === d ? { ...node, label: 1 - node.label } : node
                         );
                         store.setState({ nodes: updatedNodes });
+                        reheatSimulation();
+                        // console.log('Label change - alpha:', simulation.alpha());
                     });
                 
                 g.append("circle")
@@ -105,12 +137,28 @@ export function renderClusterView(containerId, options = {}) {
 
         // Update simulation with new data
         simulation.nodes(state.nodes);
-        simulation.alpha(0.3).restart();
+        
+        // Keep simulation active if any instance is being interacted with
+        if (state.isInteracting) {
+            simulation.alphaTarget(alphaActive);
+            // console.log('Interaction - alpha:', simulation.alpha());
+        } else if (labelsChanged) {
+            reheatSimulation();
+        } else {
+            simulation.alphaTarget(alphaInactive);
+            // console.log('No interaction - alpha:', simulation.alpha());
+        }
 
         // Update node positions on each tick
         simulation.on("tick", () => {
             svg.selectAll(".node")
                 .attr("transform", d => `translate(${d.x},${d.y})`);
+            
+            // Log alpha value every 10 ticks to avoid console spam
+            if (Math.random() < 0.1) {  // Log roughly 10% of ticks
+                // console.log('Tick - alpha:', simulation.alpha().toFixed(4), 
+                //           'target:', simulation.alphaTarget().toFixed(4));
+            }
         });
     });
 
