@@ -7,6 +7,7 @@ import { initializeMetricDisplay } from './metric-display.js';
 import { createDiscriminationStore } from './discrimination-state.js';
 import { renderContinuousOutputPlot } from './continuous-output-plot.js';
 import { renderDiscriminationPlot } from './discrimination-plot.js';
+import { renderStaticDiscriminationPlot } from './static-discrimination-plot.js';
 
 // Create shared store for cluster view
 export const store = createStore({
@@ -38,4 +39,5 @@ initializeMetricDisplay();
 
 // Render discrimination threshold visualizations
 renderContinuousOutputPlot("#continuous-output", discriminationStore);
+renderStaticDiscriminationPlot("#static-discrimination");
 renderDiscriminationPlot("#discrimination-plot", discriminationStore);

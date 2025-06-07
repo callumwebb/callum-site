@@ -2,11 +2,14 @@
 export function renderDiscriminationPlot(selector, store) {
   const margin = { top: 10, right: 10, bottom: 50, left: 10 };
   const width = 400;
-  const height = 100;
+  const height = 40;
   const berrySize = 5;
 
+  // Create container div and add slider
+  const container = d3.select(selector);
+  
   // Create SVG container
-  const svg = d3.select(selector)
+  const svg = container
     .append("svg")
     .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.bottom + margin.top}`)
     .attr("preserveAspectRatio", "xMidYMid meet")
@@ -27,44 +30,45 @@ export function renderDiscriminationPlot(selector, store) {
     .attr("transform", `translate(0,${height})`)
     .call(xAxis);
 
-  // Add axis label
-  svg.append("text")
-    .attr("transform", `translate(${width/2},${height + 40})`)
-    .style("text-anchor", "middle")
-    .text("threshold");
-
   // Add threshold line
   const thresholdLine = svg.append("line")
     .attr("class", "threshold")
     .attr("y1", 0)
     .attr("y2", height)
-    .style("stroke", "red")
+    .style("stroke", "#e03131")
     .style("stroke-width", 2)
     .style("stroke-dasharray", "4,4");
 
-  // Add threshold handle
-  const handle = svg.append("circle")
-    .attr("class", "handle")
-    .attr("r", 8)
-    .attr("cy", height)
-    .style("fill", "red")
-    .style("cursor", "pointer");
+  // Add slider
+  const sliderContainer = container
+    .append("div")
+    .style("width", "100%")
+    .style("padding", "0 10px")
+    .style("margin-top", "-30px");  // Move slider up closer to the plot
 
-  // Add drag behavior
-  const drag = d3.drag()
-    .on("drag", function(event) {
-      const x = Math.max(0, Math.min(width, event.x));
-      const threshold = xScale.invert(x);
-      store.setThreshold(threshold);
-    });
+  const slider = sliderContainer
+    .append("input")
+    .attr("type", "range")
+    .attr("min", 0)
+    .attr("max", 100)  // Use 0-100 for better precision than 0-1
+    .attr("value", store.getState().threshold * 100)
+    .style("width", "100%");
 
-  handle.call(drag);
+  // Update threshold when slider moves
+  slider.on("input", function() {
+    const threshold = +this.value / 100;  // Convert back to 0-1 range
+    store.setThreshold(threshold);
+  });
 
   function update(state) {
-    // Update threshold line and handle
+    // Update threshold line
     const x = xScale(state.threshold);
     thresholdLine.attr("x1", x).attr("x2", x);
-    handle.attr("cx", x);
+
+    // Update slider value if it was changed programmatically
+    if (+slider.node().value !== state.threshold * 100) {
+      slider.node().value = state.threshold * 100;
+    }
 
     // Update berries
     const berries = svg.selectAll(".berry")

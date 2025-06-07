@@ -25,7 +25,11 @@ Most classification algorithms output a continuous value that represents the lik
 
 <div id="continuous-output"></div>
 
-To make actual decisions, we need to convert these continuous values into discrete classifications. One common approach is to use a threshold: predictions above the threshold are classified as positive (raspberry), and those below as negative (blueberry).
+Applied to our example, our classifier may output a value of 0.99 when it's nearly certain it's looking at a raspberry, and a value of 0.1 when it's quite sure it has something that is not a raspberry (i.e. blueberry). If we applied our algorithm to the same set of berries we've been working with so far, (4 raspberries, 8 blueberries), we could get a set of outputs that look like this:
+
+<div id="static-discrimination"></div>
+
+So how can we make categorical decisions based on continuous data like this? One simplistic approach is to apply a threshold or cutoff. Predictions below the cutoff are labelled negative, and predictions above are labelled positive.
 
 Move the slider below to adjust the threshold and observe how it affects the classification of berries:
 
@@ -46,3 +50,4 @@ Notice how adjusting the threshold creates a trade-off between different types o
 <script type="module" src="./_resources/discrimination-state.js"></script>
 <script type="module" src="./_resources/continuous-output-plot.js"></script>
 <script type="module" src="./_resources/discrimination-plot.js"></script>
+<script type="module" src="./_resources/static-discrimination-plot.js"></script>
