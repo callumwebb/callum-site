@@ -53,12 +53,12 @@ export function renderRocCurve(containerId) {
         .text("true positive rate");
     
     // Add diagonal reference line
-    g.append("line")
-        .attr("x1", x(0))
-        .attr("y1", y(0))
-        .attr("x2", x(1))
-        .attr("y2", y(1))
-        .attr("class", "reference-line");
+    // g.append("line")
+    //     .attr("x1", x(0))
+    //     .attr("y1", y(0))
+    //     .attr("x2", x(1))
+    //     .attr("y2", y(1))
+    //     .attr("class", "reference-line");
     
     // Add container for the current point
     const point = g.append("circle")

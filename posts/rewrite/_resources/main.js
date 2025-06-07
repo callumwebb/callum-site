@@ -8,6 +8,7 @@ import { createDiscriminationStore } from './discrimination-state.js';
 import { renderContinuousOutputPlot } from './continuous-output-plot.js';
 import { renderDiscriminationPlot } from './discrimination-plot.js';
 import { renderStaticDiscriminationPlot } from './static-discrimination-plot.js';
+import { renderRocCurvePlot } from './roc-curve-plot.js';
 
 // Create shared store for cluster view
 export const store = createStore({
@@ -41,3 +42,5 @@ initializeMetricDisplay();
 renderContinuousOutputPlot("#continuous-output", discriminationStore);
 renderStaticDiscriminationPlot("#static-discrimination");
 renderDiscriminationPlot("#discrimination-plot", discriminationStore);
+renderDiscriminationPlot("#discrimination-plot-2", discriminationStore);
+renderRocCurvePlot("#roc-curve-plot", discriminationStore);

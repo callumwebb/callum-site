@@ -37,6 +37,16 @@ Move the slider below to adjust the threshold and observe how it affects the cla
 
 Notice how adjusting the threshold creates a trade-off between different types of errors. A low threshold means we'll correctly identify more raspberries (true positives) but at the cost of misclassifying more blueberries as raspberries (false positives). A high threshold has the opposite effect.
 
+## Drawing the ROC Curve
+
+Let's explore how we can visualize this trade-off between true positives and false positives using a Receiver Operating Characteristic (ROC) curve. We'll build this visualization step by step.
+
+<div id="roc-curve-plot"></div>
+
+Below is our familiar discrimination plot that we'll use to help understand how the ROC curve is constructed:
+
+<div id="discrimination-plot-2"></div>
+
 <!-- Load D3 -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
 
@@ -51,3 +61,4 @@ Notice how adjusting the threshold creates a trade-off between different types o
 <script type="module" src="./_resources/continuous-output-plot.js"></script>
 <script type="module" src="./_resources/discrimination-plot.js"></script>
 <script type="module" src="./_resources/static-discrimination-plot.js"></script>
+<script type="module" src="./_resources/roc-curve-plot.js"></script>

@@ -90,7 +90,8 @@
 /* Ensure SVG containers maintain aspect ratio */
 #continuous-output,
 #static-discrimination,
-#discrimination-plot {
+#discrimination-plot,
+#discrimination-plot-2 {
     width: 100%;
     max-width: 410px;
 }
@@ -100,13 +101,20 @@
     margin: 0.5em auto;
 }
 
-#discrimination-plot {
+#discrimination-plot,
+#discrimination-plot-2 {
     margin: 0.5em auto;
+}
+
+#roc-curve-plot {
+    margin: 0.5em auto 0 auto;
+    width: fit-content;
 }
 
 #continuous-output svg,
 #static-discrimination svg,
-#discrimination-plot svg {
+#discrimination-plot svg,
+#discrimination-plot-2 svg {
     width: 100%;
     height: auto;
     display: block;
@@ -167,5 +175,11 @@ input[type="range"]::-webkit-slider-thumb:active {
 input[type="range"]::-moz-range-thumb:hover,
 input[type="range"]::-moz-range-thumb:active {
     background: #fff;
+}
+
+.rocL {
+    fill: none;
+    stroke: #000;
+    stroke-width: 1;
 }
   
