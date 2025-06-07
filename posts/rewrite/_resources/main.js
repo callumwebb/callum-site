@@ -3,6 +3,7 @@ import { createStore } from './state.js';
 import { renderClusterView } from './cluster-view.js';
 import { renderConfusionMatrix } from './confusion-matrix.js';
 import { renderRocCurve } from './roc-curve.js';
+import { initializeMetricDisplay } from './metric-display.js';
 
 // Create shared store
 export const store = createStore({
@@ -27,3 +28,4 @@ renderClusterView("#clusters");
 renderConfusionMatrix("#confusion");
 renderRocCurve("#roc");
 renderClusterView("#clusters-small", { scale: 0.8 });
+initializeMetricDisplay();

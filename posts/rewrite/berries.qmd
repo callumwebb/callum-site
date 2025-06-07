@@ -6,6 +6,14 @@ css: _resources/cluster-view.css
 
 ## Interactive Visualizations
 
+<div class="metrics">
+- True positive rate (sensitivity): <span id="sensitivity"></span>
+- True negative rate (specificity): <span id="specificity"></span>
+- False positive rate: <span id="fpr"></span>
+- False negative rate: <span id="fnr"></span>
+- Precision (positive predicted value): <span id="precision"></span>
+</div>
+
 <div id="clusters"></div>
 <div id="confusion"></div>
 <div id="roc"></div>
@@ -21,3 +29,4 @@ css: _resources/cluster-view.css
 <script type="module" src="./_resources/cluster-view.js"></script>
 <script type="module" src="./_resources/confusion-matrix.js"></script>
 <script type="module" src="./_resources/roc-curve.js"></script>
+<script type="module" src="./_resources/metric-display.js"></script>
