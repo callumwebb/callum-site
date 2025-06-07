@@ -1,0 +1,27 @@
+.threshold-line {
+  stroke: #2c3e50;
+  stroke-width: 2;
+  stroke-dasharray: 4;
+}
+
+.threshold-handle {
+  fill: #2c3e50;
+  cursor: pointer;
+}
+
+.threshold-handle:hover {
+  fill: #34495e;
+}
+
+.span {
+  stroke: #95a5a6;
+  stroke-width: 2;
+}
+
+.data-point {
+  opacity: 0.7;
+}
+
+.data-point:hover {
+  opacity: 1;
+} 

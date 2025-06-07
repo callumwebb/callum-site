@@ -65,4 +65,47 @@
     font-weight: bold;
     color: #333;
 }
+
+/* Discrimination threshold styles */
+.span {
+    stroke: #868e96;
+    stroke-width: 2;
+}
+
+.threshold {
+    stroke: #e03131;
+    stroke-width: 2;
+    stroke-dasharray: 4,4;
+}
+
+.handle {
+    fill: #e03131;
+    cursor: pointer;
+}
+
+.handle:hover {
+    fill: #c92a2a;
+}
+
+/* Ensure SVG containers maintain aspect ratio */
+#continuous-output,
+#discrimination-plot {
+    width: 100%;
+    max-width: 410px;
+}
+
+#continuous-output {
+    margin: 0.5em auto;
+}
+
+#discrimination-plot {
+    margin: 2em auto;
+}
+
+#continuous-output svg,
+#discrimination-plot svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
   

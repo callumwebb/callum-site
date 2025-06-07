@@ -19,6 +19,19 @@ css: _resources/cluster-view.css
 <div id="roc"></div>
 <div id="clusters-small"></div>
 
+## Discrimination Threshold
+
+Most classification algorithms output a continuous value that represents the likelihood of an input belonging to a particular class. For our berry classifier, this might be a value between 0 and 1 indicating how likely it is that a berry is a raspberry.
+
+<div id="continuous-output"></div>
+
+To make actual decisions, we need to convert these continuous values into discrete classifications. One common approach is to use a threshold: predictions above the threshold are classified as positive (raspberry), and those below as negative (blueberry).
+
+Move the slider below to adjust the threshold and observe how it affects the classification of berries:
+
+<div id="discrimination-plot"></div>
+
+Notice how adjusting the threshold creates a trade-off between different types of errors. A low threshold means we'll correctly identify more raspberries (true positives) but at the cost of misclassifying more blueberries as raspberries (false positives). A high threshold has the opposite effect.
 
 <!-- Load D3 -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -30,3 +43,6 @@ css: _resources/cluster-view.css
 <script type="module" src="./_resources/confusion-matrix.js"></script>
 <script type="module" src="./_resources/roc-curve.js"></script>
 <script type="module" src="./_resources/metric-display.js"></script>
+<script type="module" src="./_resources/discrimination-state.js"></script>
+<script type="module" src="./_resources/continuous-output-plot.js"></script>
+<script type="module" src="./_resources/discrimination-plot.js"></script>
